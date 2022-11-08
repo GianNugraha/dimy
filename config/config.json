@@ -1,0 +1,10 @@
+{
+    "development": {
+      "username": "postgres",
+      "password": "postgres",
+      "database": "test_dimy",
+      "host": "127.0.0.1",
+      "dialect": "postgres",
+      "syncronize": true
+    }
+}  
