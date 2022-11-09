@@ -22,6 +22,16 @@ class OrderController {
     }
   }
 
+  static async getOrderByIdCustomer(req, res, next) {
+    try {
+      const {CustomerId} = req.params;
+      const order = await OrderService.getOrderByIdCustomer(CustomerId);
+      res.status(200).json(order);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async addOrder(req, res, next) {
     try {
       const { CustomerId } = req.params;

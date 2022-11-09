@@ -20,7 +20,6 @@ class ProductService {
 
   static async addNewProduct(inputValues) {
     try {
-        console.log(inputValues);
     const newProduct = await ProductRepository.addNewProduct({
         name:inputValues.name,
         price:inputValues.price

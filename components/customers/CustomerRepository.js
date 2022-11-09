@@ -17,6 +17,7 @@ const {
               attributes: ["address"],
             },
           ],
+          distinct:true,
         });
         return customer;
       } catch (error) {

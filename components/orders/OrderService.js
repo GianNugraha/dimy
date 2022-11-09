@@ -19,6 +19,15 @@ class OrderService {
     }
   }
 
+  static async getOrderByIdCustomer(CustomerId) {
+    try {
+      const order = await OrderRepository.getOrderByIdCustomer(CustomerId);
+      return order;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async addNewOrder(inputValues) {
     const transaction = await sequelize.transaction();
     try {

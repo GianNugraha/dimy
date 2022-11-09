@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get("/", OrderController.getOrder);
 router.get("/unique/:id", OrderController.getOrderById);
+router.get("/:CustomerId", OrderController.getOrderByIdCustomer);
 router.post("/:CustomerId", OrderController.addOrder);
 router.delete("/unique/:id", OrderController.deleteOrder);
 

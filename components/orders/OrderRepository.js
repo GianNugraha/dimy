@@ -40,6 +40,7 @@ class OrderRepository {
             ],
           },
         ],
+        distinct: true,
       });
       return order;
     } catch (error) {
@@ -49,7 +50,7 @@ class OrderRepository {
 
   static async getOrderById(id) {
     try {
-      const order = await Order.findOne({
+      const order = await Order.findAndCountAll({
         include: [
           {
             model: Customer,
@@ -85,6 +86,7 @@ class OrderRepository {
             ],
           },
         ],
+        distinct:true,
         where: {
           id,
         },
@@ -94,6 +96,56 @@ class OrderRepository {
       throw error;
     }
   }
+
+  static async getOrderByIdCustomer(CustomerId) {
+    try {
+      const order = await Order.findAndCountAll({
+        include: [
+          {
+            model: Customer,
+            as: "Customer",
+            attributes: ["customer_name"],
+            include: [
+              {
+                model: CustomerAddress,
+                as: "Address",
+                attributes: ["address"],
+              },
+            ],
+          },
+          {
+            model: ProductOrder,
+            as: "ProductOrder",
+            include: [
+              {
+                model: Product,
+                as: "Product",
+                attributes: ["name", "price"],
+              },
+            ],
+          },
+          {
+            model: PaymentOrder,
+            as: "PaymentOrder",
+            include: [
+              {
+                model: Payment,
+                as: "Payment",
+              },
+            ],
+          },
+        ],
+        distinct:true,
+        where: {          
+          CustomerId
+        },
+      });
+      return order;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
 
   static async addNewOrder(inputValues, t) {
     try {
