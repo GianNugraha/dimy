@@ -28,18 +28,34 @@ class CustomerController {
         inputValues
       );
       
-      // const CustomerId = newCustomer.id
-      // const inputValuesAddress = {
-      //   address,
-      // };
-      // const newCustomerAddress = await CustomerService.addNewCustomerAddress(
-      //   inputValuesAddress
-      // );
+      const CustomerId = newCustomer.id
+      
+      const inputValuesAddress = {
+        CustomerId:CustomerId,
+        address,
+      };
+      const newCustomerAddress = await CustomerService.addNewCustomerAddress(
+        inputValuesAddress
+      );
 
       res.status(201).json(newCustomer);
     } catch (error) {
       next(error);
     }
   }
+
+  static async deleteCustomer(req, res, next) {
+    try {
+      const { id } = req.params;
+      const deleteCustomer = await CustomerService.deleteCustomer(id);
+      if (!deleteCustomer) {
+        throw { message: "Delete Customer Unsuccessful" };
+      }
+      res.status(201).json("Success Deleted Data");
+    } catch (error) {
+      next(error);
+    }
+  }
+  
 }
 module.exports = CustomerController;
